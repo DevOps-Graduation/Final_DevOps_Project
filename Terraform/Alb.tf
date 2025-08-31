@@ -25,7 +25,7 @@ resource "aws_iam_role" "alb_irsa" {
 }
 
 resource "aws_iam_policy" "alb_controller" {
-  name        = "AWSLoadBalancerControllerIAMPolicy"
+  name        = "${var.cluster_name}-AWSLoadBalancerControllerIAMPolicy"
   description = "IAM policy for AWS Load Balancer Controller"
   policy      = file("iam_policy.json")
 }
@@ -41,7 +41,7 @@ resource "aws_iam_role_policy_attachment" "alb_policy_attach" {
 
 resource "kubernetes_service_account" "alb_sa" {
   metadata {
-    name      = "aws-load-balancer-controller"
+    name      = "${cluster_name}-aws-load-balancer-controller"
     namespace = "kube-system"
     annotations = {
       "eks.amazonaws.com/role-arn" = aws_iam_role.alb_irsa.arn

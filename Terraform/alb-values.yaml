@@ -4,4 +4,4 @@ vpcId: ${vpc_id}
 
 serviceAccount:
   create: false
-  name: aws-load-balancer-controller
+  name: ${cluster_name}-aws-load-balancer-controller
